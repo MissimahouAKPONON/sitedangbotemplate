@@ -7,6 +7,7 @@ import { ServicesSectionComponent } from './components/services-section.componen
 import { NewsCategoriesComponent } from './components/news-categories.component';
 import { NewsDetailComponent } from './components/news-detail.component';
 import { FooterComponent } from './components/footer.component';
+import { DiscoverDangboComponent } from './components/discover-dangbo.component';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ import { FooterComponent } from './components/footer.component';
     ServicesSectionComponent,
     NewsCategoriesComponent,
     NewsDetailComponent,
-    FooterComponent
+    FooterComponent,
+    DiscoverDangboComponent
   ],
   template: `
     <div class="app">
@@ -26,6 +28,7 @@ import { FooterComponent } from './components/footer.component';
       <main>
         <app-hero></app-hero>
         <app-news-section></app-news-section>
+        <app-discover-dangbo id="decouvrir"></app-discover-dangbo>
         <app-news-categories></app-news-categories>
         <app-services-section></app-services-section>
       </main>

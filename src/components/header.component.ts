@@ -28,6 +28,7 @@ import { CommonModule } from '@angular/common';
           <nav class="nav" [class.nav-open]="mobileMenuOpen">
             <ul class="nav-list">
               <li><a href="#actualites">Actualités</a></li>
+              <li><a href="#decouvrir">Découvrir Dangbo</a></li>
               <li><a href="#maire">Le Maire</a></li>
               <li><a href="#services">Services</a></li>
               <li><a href="#projets">Projets</a></li>
