@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-services',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   template: `
     <section class="services">
       <div class="container">
@@ -42,7 +43,7 @@ import { CommonModule } from '@angular/common';
               <ul class="service-list">
                 <li class="service-item">
                   <span class="item-icon">▶</span>
-                  <span>Célébration de mariage</span>
+                  <a routerLink="/services/celebration-mariage">Célébration de mariage</a>
                 </li>
                 <li class="service-item">
                   <span class="item-icon">▶</span>
@@ -363,6 +364,18 @@ import { CommonModule } from '@angular/common';
       color: #000000;
       line-height: 1.5;
       font-size: 0.95rem;
+    }
+
+    .service-item a {
+      color: #000000;
+      text-decoration: none;
+      line-height: 1.5;
+      font-size: 0.95rem;
+      transition: color 0.3s ease;
+    }
+
+    .service-item a:hover {
+      color: #6763E1;
     }
 
     .explore-btn {
