@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-services',
@@ -43,7 +43,7 @@ import { RouterModule } from '@angular/router';
               <ul class="service-list">
                 <li class="service-item">
                   <span class="item-icon">▶</span>
-                  <a routerLink="/services/celebration-mariage">Célébration de mariage</a>
+                  <span>Célébration de mariage</span>
                 </li>
                 <li class="service-item">
                   <span class="item-icon">▶</span>
@@ -58,7 +58,7 @@ import { RouterModule } from '@angular/router';
                   <span>Dépôt de signature</span>
                 </li>
               </ul>
-              <button class="explore-btn">
+              <button class="explore-btn" (click)="exploreService('etat-civil')">
                 Explorer →
               </button>
             </div>
@@ -91,7 +91,7 @@ import { RouterModule } from '@angular/router';
                   <span>Vente de convention</span>
                 </li>
               </ul>
-              <button class="explore-btn">
+              <button class="explore-btn" (click)="exploreService('affaires-domaniales')">
                 Explorer →
               </button>
             </div>
@@ -124,7 +124,7 @@ import { RouterModule } from '@angular/router';
                   <span>Occupation du domaine public local aux fins d'activités lucratives</span>
                 </li>
               </ul>
-              <button class="explore-btn">
+              <button class="explore-btn" (click)="exploreService('services-marchands')">
                 Explorer →
               </button>
             </div>
@@ -157,7 +157,7 @@ import { RouterModule } from '@angular/router';
                   <span>Publicité de boissons alcoolisées et tabacs</span>
                 </li>
               </ul>
-              <button class="explore-btn">
+              <button class="explore-btn" (click)="exploreService('espace-publicitaire')">
                 Explorer →
               </button>
             </div>
@@ -511,6 +511,9 @@ export class ServicesComponent {
     // Pour l'instant, on redirige vers la page de célébration de mariage
     // Plus tard, on pourra créer des pages spécifiques pour chaque service
     switch(serviceType) {
+      case 'etat-civil':
+        this.router.navigate(['/services/celebration-mariage']);
+        break;
       case 'affaires-domaniales':
         // Redirection temporaire vers célébration de mariage
         this.router.navigate(['/services/celebration-mariage']);
@@ -528,6 +531,3 @@ export class ServicesComponent {
     }
   }
 }
-export class ServicesComponent {}
-
-export { ServicesComponent }
