@@ -504,4 +504,30 @@ import { RouterModule } from '@angular/router';
     }
   `]
 })
+export class ServicesComponent {
+  constructor(private router: Router) {}
+
+  exploreService(serviceType: string) {
+    // Pour l'instant, on redirige vers la page de célébration de mariage
+    // Plus tard, on pourra créer des pages spécifiques pour chaque service
+    switch(serviceType) {
+      case 'affaires-domaniales':
+        // Redirection temporaire vers célébration de mariage
+        this.router.navigate(['/services/celebration-mariage']);
+        break;
+      case 'services-marchands':
+        // Redirection temporaire vers célébration de mariage
+        this.router.navigate(['/services/celebration-mariage']);
+        break;
+      case 'espace-publicitaire':
+        // Redirection temporaire vers célébration de mariage
+        this.router.navigate(['/services/celebration-mariage']);
+        break;
+      default:
+        this.router.navigate(['/services/celebration-mariage']);
+    }
+  }
+}
 export class ServicesComponent {}
+
+export { ServicesComponent }
