@@ -1,65 +1,64 @@
+export interface NewsCategory {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  color: string;
+}
+
 export interface NewsItem {
   id: string;
   title: string;
   excerpt: string;
   content: string;
-  category: NewsCategory;
-  date: string;
   author: string;
-  imageUrl?: string;
+  date: string;
+  category: NewsCategory;
   tags: string[];
-  featured: boolean;
-}
-
-export interface NewsCategory {
-  id: string;
-  name: string;
-  icon: string;
-  color: string;
-  description: string;
+  imageUrl?: string;
 }
 
 export const NEWS_CATEGORIES: NewsCategory[] = [
   {
-    id: 'maire',
-    name: 'Actualités du Maire',
-    icon: '👨‍💼',
-    color: '#6763E1',
-    description: 'Communications et annonces officielles du maire'
+    id: 'municipal',
+    name: 'Municipal',
+    description: 'Actualités de la mairie et des services municipaux',
+    icon: '🏛️',
+    color: '#6763E1'
   },
   {
     id: 'projets',
-    name: 'Projets Urbains',
+    name: 'Projets',
+    description: 'Grands projets et aménagements urbains',
     icon: '🏗️',
-    color: '#5AB156',
-    description: 'Développement et aménagement de la ville'
-  },
-  {
-    id: 'services',
-    name: 'Services Municipaux',
-    icon: '🏛️',
-    color: '#72444A',
-    description: 'Informations sur les services aux citoyens'
+    color: '#5AB156'
   },
   {
     id: 'culture',
-    name: 'Culture & Événements',
+    name: 'Culture',
+    description: 'Événements culturels et patrimoine',
     icon: '🎭',
-    color: '#6763E1',
-    description: 'Activités culturelles et événements communautaires'
+    color: '#FF6B6B'
+  },
+  {
+    id: 'social',
+    name: 'Social',
+    description: 'Actions sociales et solidarité',
+    icon: '🤝',
+    color: '#4ECDC4'
   },
   {
     id: 'environnement',
     name: 'Environnement',
+    description: 'Écologie et développement durable',
     icon: '🌱',
-    color: '#5AB156',
-    description: 'Initiatives écologiques et développement durable'
+    color: '#45B7D1'
   },
   {
-    id: 'social',
-    name: 'Action Sociale',
-    icon: '🤝',
-    color: '#72444A',
-    description: 'Programmes sociaux et aide aux citoyens'
+    id: 'economie',
+    name: 'Économie',
+    description: 'Développement économique local',
+    icon: '💼',
+    color: '#96CEB4'
   }
 ];
