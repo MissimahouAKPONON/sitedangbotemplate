@@ -1,52 +1,22 @@
 import { Component } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { HeaderComponent } from './components/header.component';
-import { HeroComponent } from './components/hero.component';
-import { NewsSectionComponent } from './components/news-section.component';
-import { ServicesSectionComponent } from './components/services-section.component';
-import { NewsCategoriesComponent } from './components/news-categories.component';
-import { NewsDetailComponent } from './components/news-detail.component';
-import { FooterComponent } from './components/footer.component';
-import { DiscoverDangboComponent } from './components/discover-dangbo.component';
+import { provideRouter } from '@angular/router';
+import { routes } from './app/app.routes';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    HeaderComponent,
-    HeroComponent,
-    NewsSectionComponent,
-    ServicesSectionComponent,
-    NewsCategoriesComponent,
-    NewsDetailComponent,
-    FooterComponent,
-    DiscoverDangboComponent
-  ],
+  imports: [RouterOutlet],
   template: `
-    <div class="app">
-      <app-header></app-header>
-      <main>
-        <app-hero></app-hero>
-        <app-news-section></app-news-section>
-        <app-discover-dangbo id="decouvrir"></app-discover-dangbo>
-        <app-news-categories></app-news-categories>
-        <app-services-section></app-services-section>
-      </main>
-      <app-footer></app-footer>
-    </div>
+    <router-outlet></router-outlet>
   `,
-  styles: [`
-    .app {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    main {
-      flex: 1;
-    }
-  `]
+  styles: []
 })
 export class App {}
 
-bootstrapApplication(App);
+bootstrapApplication(App, {
+  providers: [
+    provideRouter(routes)
+  ]
+});

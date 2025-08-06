@@ -1,20 +1,21 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   template: `
     <header class="header">
       <div class="container">
         <div class="header-content">
           <div class="logo-section">
-            <div class="logo">
+            <div class="logo" routerLink="/">
               <img src="src/assets/dg.png" />
               <div class="logo-text">
                 <h1>Mairie</h1>
-                <span>Ville Exemple</span>
+                <span>Dangbo</span>
               </div>
             </div>
           </div>
@@ -27,10 +28,10 @@ import { CommonModule } from '@angular/common';
           
           <nav class="nav" [class.nav-open]="mobileMenuOpen">
             <ul class="nav-list">
-              <li><a href="#actualites">Actualités</a></li>
-              <li><a href="#decouvrir">Découvrir Dangbo</a></li>
+              <li><a routerLink="/" fragment="actualites">Actualités</a></li>
+              <li><a routerLink="/decouvrir-dangbo">Découvrir Dangbo</a></li>
               <li><a href="#maire">Le Maire</a></li>
-              <li><a href="#services">Services</a></li>
+              <li><a routerLink="/" fragment="services">Services</a></li>
               <li><a href="#projets">Projets</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
@@ -65,6 +66,12 @@ import { CommonModule } from '@angular/common';
       display: flex;
       align-items: center;
       gap: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.02);
     }
 
     .logo-icon {
