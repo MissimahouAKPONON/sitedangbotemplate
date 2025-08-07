@@ -21,6 +21,7 @@ import { RouterModule } from '@angular/router';
           </div>
           
           <button class="mobile-menu-btn" (click)="toggleMobileMenu()">
+            [class.active]="mobileMenuOpen"
             <span></span>
             <span></span>
             <span></span>
@@ -105,16 +106,34 @@ import { RouterModule } from '@angular/router';
       background: none;
       border: none;
       cursor: pointer;
-      padding: 0.5rem;
+      padding: 0.75rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-btn:hover {
+      background: rgba(103, 99, 225, 0.1);
     }
 
     .mobile-menu-btn span {
       width: 25px;
       height: 3px;
-      background-color: #000000;
+      background-color: #6763E1;
       margin: 3px 0;
       transition: 0.3s;
       border-radius: 2px;
+    }
+
+    .mobile-menu-btn.active span:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .mobile-menu-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-btn.active span:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
     }
 
     .nav-list {
@@ -160,6 +179,21 @@ import { RouterModule } from '@angular/router';
     @media (max-width: 768px) {
       .mobile-menu-btn {
         display: flex;
+        order: 2;
+      }
+
+      .logo-section {
+        order: 1;
+        margin-right: 0;
+        flex: 1;
+      }
+
+      .logo-text h1 {
+        font-size: 1.5rem;
+      }
+
+      .logo-text span {
+        font-size: 0.8rem;
       }
 
       .nav {
@@ -167,13 +201,14 @@ import { RouterModule } from '@angular/router';
         top: 100%;
         left: 0;
         right: 0;
-        background: #DDDCF6;
-        border-top: 1px solid #6763E1;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        transform: translateY(-100%);
+        background: linear-gradient(135deg, #ffffff 0%, #DDDCF6 100%);
+        border-top: 2px solid #6763E1;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        transform: translateY(-20px);
         opacity: 0;
         visibility: hidden;
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 0 0 15px 15px;
       }
 
       .nav-open {
@@ -184,14 +219,35 @@ import { RouterModule } from '@angular/router';
 
       .nav-list {
         flex-direction: column;
-        padding: 1rem;
+        padding: 1.5rem;
         gap: 0;
       }
 
       .nav-list a {
         display: block;
-        padding: 1rem;
-        border-bottom: 1px solid #6763E1;
+        padding: 1.2rem 1rem;
+        border-bottom: 1px solid rgba(103, 99, 225, 0.2);
+        border-radius: 8px;
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .nav-list a:hover {
+        background: linear-gradient(135deg, #6763E1, #5AB156);
+        color: white;
+        transform: translateX(5px);
+        border-bottom-color: transparent;
+      }
+
+      .nav-list a::after {
+        display: none;
+      }
+
+      .nav-list li:last-child a {
+        border-bottom: none;
+        margin-bottom: 0;
       }
     }
   `]
