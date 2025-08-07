@@ -169,6 +169,28 @@ import { FormsModule } from '@angular/forms';
         </div>
       </div>
     </section>
+    <!-- Modal d'aperçu du document -->
+    <div class="document-preview-modal" *ngIf="selectedDocumentForPreview" (click)="closePreview()">
+      <div class="preview-content" (click)="$event.stopPropagation()">
+        <div class="preview-header">
+          <h3>{{ selectedDocumentForPreview.title }}</h3>
+          <button class="close-preview-btn" (click)="closePreview()">×</button>
+        </div>
+        <div class="preview-body">
+          <div class="document-meta-preview">
+            <span class="meta-item">📅 {{ formatDate(selectedDocumentForPreview.date) }}</span>
+            <span class="meta-item">📄 {{ selectedDocumentForPreview.type }}</span>
+            <span class="meta-item">💾 {{ selectedDocumentForPreview.size }}</span>
+          </div>
+          <div class="document-content" [innerHTML]="selectedDocumentForPreview.content"></div>
+        </div>
+        <div class="preview-footer">
+          <button class="download-btn" (click)="downloadDocument(selectedDocumentForPreview)">
+            📥 Télécharger le document complet
+          </button>
+        </div>
+      </div>
+    </div>
   `,
   styles: [`
     .documentation {
@@ -696,6 +718,170 @@ import { FormsModule } from '@angular/forms';
       font-size: 0.9rem;
     }
 
+    .document-preview-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 2rem;
+    }
+
+    .preview-content {
+      background: #ffffff;
+      border-radius: 15px;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem;
+      border-bottom: 2px solid #6763E1;
+      background: linear-gradient(135deg, #6763E1, #5AB156);
+      color: white;
+      border-radius: 15px 15px 0 0;
+    }
+
+    .preview-header h3 {
+      margin: 0;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .close-preview-btn {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .close-preview-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.1);
+    }
+
+    .preview-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 2rem;
+    }
+
+    .document-meta-preview {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      background: #DDDCF6;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #72444A;
+      font-weight: 500;
+    }
+
+    .document-content {
+      line-height: 1.7;
+      color: #000000;
+    }
+
+    .document-content h2 {
+      color: #6763E1;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #6763E1;
+      padding-bottom: 0.5rem;
+    }
+
+    .document-content h3 {
+      color: #5AB156;
+      font-size: 1.4rem;
+      margin: 1.5rem 0 1rem 0;
+    }
+
+    .document-content h4 {
+      color: #72444A;
+      font-size: 1.2rem;
+      margin: 1.2rem 0 0.8rem 0;
+    }
+
+    .document-content h5 {
+      color: #6763E1;
+      font-size: 1.1rem;
+      margin: 1rem 0 0.5rem 0;
+    }
+
+    .document-content p {
+      margin-bottom: 1rem;
+      text-align: justify;
+    }
+
+    .document-content ul, .document-content ol {
+      margin-bottom: 1rem;
+      padding-left: 2rem;
+    }
+
+    .document-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    .document-content strong {
+      color: #6763E1;
+      font-weight: 600;
+    }
+
+    .document-content em {
+      color: #72444A;
+      font-style: italic;
+    }
+
+    .preview-footer {
+      padding: 2rem;
+      border-top: 1px solid #DDDCF6;
+      background: #DDDCF6;
+      border-radius: 0 0 15px 15px;
+      text-align: center;
+    }
+
+    .preview-footer .download-btn {
+      background: linear-gradient(135deg, #6763E1, #5AB156);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .preview-footer .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(103, 99, 225, 0.3);
+    }
+
     @media (max-width: 768px) {
       .documentation {
         padding: 1rem 0;
@@ -743,6 +929,34 @@ import { FormsModule } from '@angular/forms';
       .stats-grid {
         grid-template-columns: 1fr;
       }
+
+      .document-preview-modal {
+        padding: 1rem;
+      }
+
+      .preview-header {
+        padding: 1.5rem;
+      }
+
+      .preview-header h3 {
+        font-size: 1.1rem;
+      }
+
+      .preview-body {
+        padding: 1.5rem;
+      }
+
+      .document-content h2 {
+        font-size: 1.5rem;
+      }
+
+      .document-content h3 {
+        font-size: 1.2rem;
+      }
+
+      .preview-footer {
+        padding: 1.5rem;
+      }
     }
   `]
 })
@@ -753,6 +967,7 @@ export class DocumentationComponent {
   sortOrder = 'date-desc';
   currentPage = 1;
   itemsPerPage = 10;
+  selectedDocumentForPreview: any = null;
 
   documentCategories = [
     {
@@ -802,7 +1017,27 @@ export class DocumentationComponent {
       type: 'PDF',
       size: '2.5 MB',
       date: '2025-06-15',
-      year: '2025'
+      year: '2025',
+      content: `
+        <h2>COMMUNIQUÉ FINAL DU 43ème CONGRÈS DE L'AIMF</h2>
+        <h3>Dangbo, République du Bénin - 15 juin 2025</h3>
+        
+        <p><strong>Les maires francophones réunis à Dangbo adoptent la "Déclaration de Dangbo"</strong></p>
+        
+        <p>Du 12 au 15 juin 2025, la ville de Dangbo a accueilli le 43ème Congrès de l'Association Internationale des Maires Francophones (AIMF) sous le thème "Villes durables et résilientes : défis et opportunités pour les municipalités francophones".</p>
+        
+        <h4>Principales résolutions adoptées :</h4>
+        <ul>
+          <li>Renforcement de la coopération décentralisée entre villes francophones</li>
+          <li>Mise en place d'un fonds de solidarité pour les projets environnementaux</li>
+          <li>Création d'une plateforme d'échange de bonnes pratiques municipales</li>
+          <li>Programme de formation des élus locaux francophones</li>
+        </ul>
+        
+        <p>Plus de 150 maires et représentants de 45 pays ont participé à cet événement historique organisé par la municipalité de Dangbo.</p>
+        
+        <p><em>Pour plus d'informations, contactez le secrétariat de l'AIMF.</em></p>
+      `
     },
     {
       id: '2',
@@ -812,7 +1047,27 @@ export class DocumentationComponent {
       type: 'PDF',
       size: '1.8 MB',
       date: '2025-06-14',
-      year: '2025'
+      year: '2025',
+      content: `
+        <h2>DÉCLARATION DE DANGBO</h2>
+        <h3>Pour des villes francophones durables et résilientes</h3>
+        
+        <p><strong>Nous, maires et représentants des villes francophones, réunis à Dangbo les 12-15 juin 2025, déclarons :</strong></p>
+        
+        <h4>Article 1 - Engagement environnemental</h4>
+        <p>Nous nous engageons à réduire de 50% nos émissions de gaz à effet de serre d'ici 2030 et à atteindre la neutralité carbone d'ici 2050.</p>
+        
+        <h4>Article 2 - Coopération renforcée</h4>
+        <p>Nous renforçons nos liens de coopération décentralisée pour partager nos expériences et mutualiser nos ressources.</p>
+        
+        <h4>Article 3 - Innovation et numérique</h4>
+        <p>Nous promouvons l'innovation et la transformation numérique au service de nos citoyens.</p>
+        
+        <h4>Article 4 - Jeunesse et formation</h4>
+        <p>Nous investissons dans la formation de nos jeunes et leur participation à la vie démocratique locale.</p>
+        
+        <p><strong>Fait à Dangbo, le 15 juin 2025</strong></p>
+      `
     },
     {
       id: '3',
@@ -822,7 +1077,33 @@ export class DocumentationComponent {
       type: 'PDF',
       size: '3.2 MB',
       date: '2025-01-15',
-      year: '2025'
+      year: '2025',
+      content: `
+        <h2>DÉLIBÉRATION N°001/2025</h2>
+        <h3>Conseil Municipal de Dangbo - Session du 15 janvier 2025</h3>
+        
+        <p><strong>Objet :</strong> Adoption du budget primitif 2025</p>
+        
+        <h4>Recettes prévisionnelles 2025 :</h4>
+        <ul>
+          <li>Fiscalité locale : 2 850 000 000 FCFA</li>
+          <li>Dotations de l'État : 1 200 000 000 FCFA</li>
+          <li>Subventions et partenariats : 450 000 000 FCFA</li>
+          <li>Autres recettes : 300 000 000 FCFA</li>
+        </ul>
+        
+        <h4>Dépenses prévisionnelles 2025 :</h4>
+        <ul>
+          <li>Fonctionnement : 2 100 000 000 FCFA</li>
+          <li>Investissement : 2 700 000 000 FCFA</li>
+        </ul>
+        
+        <p><strong>Total budget :</strong> 4 800 000 000 FCFA</p>
+        
+        <p>Le conseil municipal approuve à l'unanimité ce budget qui permettra de financer les grands projets de développement de la commune.</p>
+        
+        <p><em>Le Maire,<br>Monsieur [Nom du Maire]</em></p>
+      `
     },
     {
       id: '4',
@@ -832,7 +1113,49 @@ export class DocumentationComponent {
       type: 'PDF',
       size: '5.7 MB',
       date: '2025-02-20',
-      year: '2025'
+      year: '2025',
+      content: `
+        <h2>PLAN DE DÉVELOPPEMENT COMMUNAL 2025-2030</h2>
+        <h3>Vision stratégique pour Dangbo</h3>
+        
+        <h4>Vision :</h4>
+        <p>"Faire de Dangbo une ville moderne, attractive et durable, référence en matière de développement local en Afrique de l'Ouest"</p>
+        
+        <h4>Axes stratégiques :</h4>
+        
+        <h5>1. Développement économique et touristique</h5>
+        <ul>
+          <li>Modernisation du port de pêche</li>
+          <li>Développement du tourisme lacustre</li>
+          <li>Création d'un marché moderne</li>
+          <li>Promotion de l'artisanat local</li>
+        </ul>
+        
+        <h5>2. Infrastructure et aménagement urbain</h5>
+        <ul>
+          <li>Réhabilitation de la voirie urbaine</li>
+          <li>Extension du réseau d'éclairage public</li>
+          <li>Amélioration de l'assainissement</li>
+          <li>Construction d'équipements publics</li>
+        </ul>
+        
+        <h5>3. Services sociaux et éducation</h5>
+        <ul>
+          <li>Construction de nouvelles écoles</li>
+          <li>Amélioration des services de santé</li>
+          <li>Programmes sociaux pour les plus vulnérables</li>
+        </ul>
+        
+        <h5>4. Environnement et développement durable</h5>
+        <ul>
+          <li>Protection du lac Nokoué</li>
+          <li>Programme de reboisement</li>
+          <li>Gestion durable des déchets</li>
+          <li>Énergies renouvelables</li>
+        </ul>
+        
+        <p><strong>Budget total :</strong> 15 milliards FCFA sur 5 ans</p>
+      `
     },
     {
       id: '5',
@@ -842,7 +1165,51 @@ export class DocumentationComponent {
       type: 'PDF',
       size: '4.1 MB',
       date: '2025-03-10',
-      year: '2025'
+      year: '2025',
+      content: `
+        <h2>RAPPORT TECHNIQUE</h2>
+        <h3>Projet de réhabilitation du port de pêche de Dangbo</h3>
+        
+        <h4>1. Diagnostic de l'existant</h4>
+        <p>Le port de pêche de Dangbo, construit dans les années 1980, présente des signes de vétusté importants :</p>
+        <ul>
+          <li>Dégradation des quais et pontons</li>
+          <li>Insuffisance des équipements de conservation</li>
+          <li>Manque d'espaces de stockage</li>
+          <li>Problèmes d'assainissement</li>
+        </ul>
+        
+        <h4>2. Objectifs du projet</h4>
+        <ul>
+          <li>Moderniser les infrastructures portuaires</li>
+          <li>Améliorer les conditions de travail des pêcheurs</li>
+          <li>Augmenter la capacité de traitement du poisson</li>
+          <li>Créer de nouveaux emplois</li>
+        </ul>
+        
+        <h4>3. Travaux prévus</h4>
+        <ul>
+          <li>Reconstruction de 500m de quais</li>
+          <li>Installation de chambres froides (capacité 50 tonnes)</li>
+          <li>Construction d'un marché au poisson moderne</li>
+          <li>Aménagement d'aires de stationnement</li>
+          <li>Mise en place d'un système d'assainissement</li>
+        </ul>
+        
+        <h4>4. Budget et financement</h4>
+        <p><strong>Coût total :</strong> 2,5 milliards FCFA</p>
+        <p><strong>Financement :</strong></p>
+        <ul>
+          <li>État du Bénin : 40%</li>
+          <li>Partenaires internationaux : 35%</li>
+          <li>Commune de Dangbo : 25%</li>
+        </ul>
+        
+        <h4>5. Planning</h4>
+        <p><strong>Durée des travaux :</strong> 18 mois</p>
+        <p><strong>Début des travaux :</strong> Septembre 2025</p>
+        <p><strong>Livraison prévue :</strong> Mars 2027</p>
+      `
     },
     {
       id: '6',
@@ -852,7 +1219,50 @@ export class DocumentationComponent {
       type: 'PDF',
       size: '2.9 MB',
       date: '2025-04-05',
-      year: '2025'
+      year: '2025',
+      content: `
+        <h2>AVIS D'APPEL D'OFFRES</h2>
+        <h3>Construction d'un marché moderne à Dangbo</h3>
+        
+        <p><strong>Maître d'ouvrage :</strong> Commune de Dangbo</p>
+        <p><strong>Objet :</strong> Construction d'un marché moderne au centre-ville</p>
+        
+        <h4>Description du projet :</h4>
+        <ul>
+          <li>Surface couverte : 5 000 m²</li>
+          <li>300 boutiques et étals</li>
+          <li>Espaces de stockage réfrigérés</li>
+          <li>Parking de 200 places</li>
+          <li>Système de gestion des déchets</li>
+          <li>Panneaux solaires (100 kW)</li>
+        </ul>
+        
+        <h4>Conditions de participation :</h4>
+        <ul>
+          <li>Entreprises de BTP agréées</li>
+          <li>Chiffre d'affaires minimum : 500 millions FCFA</li>
+          <li>Expérience en construction de marchés</li>
+          <li>Certification qualité ISO 9001</li>
+        </ul>
+        
+        <h4>Budget prévisionnel :</h4>
+        <p><strong>1,8 milliard FCFA TTC</strong></p>
+        
+        <h4>Calendrier :</h4>
+        <ul>
+          <li>Date limite de dépôt des offres : 15 mai 2025</li>
+          <li>Ouverture des plis : 20 mai 2025</li>
+          <li>Attribution du marché : 30 juin 2025</li>
+          <li>Début des travaux : Septembre 2025</li>
+          <li>Durée des travaux : 24 mois</li>
+        </ul>
+        
+        <p><strong>Contact :</strong><br>
+        Direction des Marchés Publics<br>
+        Mairie de Dangbo<br>
+        Tél : +229 XX XX XX XX<br>
+        Email : marches@dangbo.bj</p>
+      `
     },
     {
       id: '7',
@@ -862,7 +1272,50 @@ export class DocumentationComponent {
       type: 'PDF',
       size: '2.1 MB',
       date: '2025-04-30',
-      year: '2025'
+      year: '2025',
+      content: `
+        <h2>DÉLIBÉRATION N°003/2025</h2>
+        <h3>Conseil de Supervision - Session du 30 avril 2025</h3>
+        
+        <p><strong>Objet :</strong> Rapport de supervision des projets municipaux - 1er trimestre 2025</p>
+        
+        <h4>Projets supervisés :</h4>
+        
+        <h5>1. Réhabilitation du port de pêche</h5>
+        <ul>
+          <li>Avancement : 15%</li>
+          <li>Statut : Conforme au planning</li>
+          <li>Budget consommé : 375 millions FCFA</li>
+          <li>Observations : Travaux de terrassement terminés</li>
+        </ul>
+        
+        <h5>2. Construction d'écoles primaires</h5>
+        <ul>
+          <li>Avancement : 45%</li>
+          <li>Statut : Léger retard (2 semaines)</li>
+          <li>Budget consommé : 180 millions FCFA</li>
+          <li>Observations : Retard dû aux intempéries</li>
+        </ul>
+        
+        <h5>3. Programme de reboisement</h5>
+        <ul>
+          <li>Avancement : 60%</li>
+          <li>Statut : En avance sur le planning</li>
+          <li>Budget consommé : 45 millions FCFA</li>
+          <li>Observations : 3000 plants mis en terre</li>
+        </ul>
+        
+        <h4>Recommandations :</h4>
+        <ol>
+          <li>Accélérer les travaux scolaires pour rattraper le retard</li>
+          <li>Renforcer le suivi environnemental du port</li>
+          <li>Poursuivre le programme de reboisement</li>
+        </ol>
+        
+        <p><strong>Prochaine session :</strong> 31 juillet 2025</p>
+        
+        <p><em>Le Président du Conseil de Supervision</em></p>
+      `
     },
     {
       id: '8',
@@ -872,7 +1325,62 @@ export class DocumentationComponent {
       type: 'PDF',
       size: '6.3 MB',
       date: '2025-05-15',
-      year: '2025'
+      year: '2025',
+      content: `
+        <h2>ÉTUDE D'IMPACT ENVIRONNEMENTAL</h2>
+        <h3>Projet de reboisement des berges du lac Nokoué</h3>
+        
+        <h4>1. Contexte et objectifs</h4>
+        <p>Le lac Nokoué, écosystème vital pour Dangbo, subit une dégradation progressive due à :</p>
+        <ul>
+          <li>L'érosion des berges</li>
+          <li>La pollution urbaine</li>
+          <li>La surpêche</li>
+          <li>Le changement climatique</li>
+        </ul>
+        
+        <h4>2. Description du projet</h4>
+        <ul>
+          <li>Plantation de 5000 arbres sur 10 km de berges</li>
+          <li>Espèces locales : palmiers, mangroves, acacias</li>
+          <li>Création de pépinières communautaires</li>
+          <li>Formation des populations riveraines</li>
+        </ul>
+        
+        <h4>3. Impacts positifs attendus</h4>
+        <ul>
+          <li>Réduction de l'érosion de 70%</li>
+          <li>Amélioration de la qualité de l'eau</li>
+          <li>Restauration de la biodiversité</li>
+          <li>Création d'emplois verts (50 emplois)</li>
+          <li>Séquestration de 500 tonnes de CO2/an</li>
+        </ul>
+        
+        <h4>4. Mesures d'accompagnement</h4>
+        <ul>
+          <li>Sensibilisation des communautés</li>
+          <li>Mise en place de comités de gestion</li>
+          <li>Suivi scientifique sur 10 ans</li>
+          <li>Programme d'écotourisme</li>
+        </ul>
+        
+        <h4>5. Budget et financement</h4>
+        <p><strong>Coût total :</strong> 150 millions FCFA</p>
+        <ul>
+          <li>Fonds Vert Climat : 60%</li>
+          <li>Commune de Dangbo : 25%</li>
+          <li>Partenaires ONG : 15%</li>
+        </ul>
+        
+        <h4>6. Planning</h4>
+        <ul>
+          <li>Phase 1 (Pépinières) : Juin-Août 2025</li>
+          <li>Phase 2 (Plantation) : Septembre 2025-Mars 2026</li>
+          <li>Phase 3 (Suivi) : Avril 2026-2035</li>
+        </ul>
+        
+        <p><strong>Conclusion :</strong> Ce projet contribuera significativement à la restauration écologique du lac Nokoué et au développement durable de Dangbo.</p>
+      `
     }
   ];
 
@@ -971,8 +1479,11 @@ export class DocumentationComponent {
   }
 
   viewDocument(document: any) {
-    console.log('Aperçu du document:', document.title);
-    // Ici on pourrait ouvrir un modal ou une nouvelle fenêtre
+    this.selectedDocumentForPreview = document;
+  }
+
+  closePreview() {
+    this.selectedDocumentForPreview = null;
   }
 
   downloadDocument(document: any) {
