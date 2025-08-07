@@ -352,8 +352,7 @@ export class NewsSectionComponent {
   }
 
   viewAllNews() {
-    // Navigation vers la page complète des actualités
-    console.log('Navigation vers toutes les actualités');
+    window.location.href = '/actualites';
   }
 
   formatDate(dateString: string): string {

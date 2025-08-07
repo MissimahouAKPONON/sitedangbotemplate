@@ -26,20 +26,6 @@ import { NewsDetailComponent } from './news-detail.component';
               Restez informé des dernières nouvelles, événements et décisions de votre municipalité
             </p>
           </div>
-          <div class="hero-stats">
-            <div class="stat-item">
-              <span class="stat-number">{{ allNews.length }}</span>
-              <span class="stat-label">Articles</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-number">{{ categories.length }}</span>
-              <span class="stat-label">Catégories</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-number">{{ getThisMonthNews() }}</span>
-              <span class="stat-label">Ce mois</span>
-            </div>
-          </div>
         </div>
 
         <!-- Filtres de catégories -->
@@ -207,10 +193,7 @@ import { NewsDetailComponent } from './news-detail.component';
     }
 
     .hero-section {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 3rem;
-      align-items: center;
+      text-align: center;
       margin-bottom: 4rem;
       padding: 3rem;
       background: linear-gradient(135deg, #6763E1 0%, #5AB156 100%);
@@ -229,32 +212,6 @@ import { NewsDetailComponent } from './news-detail.component';
       font-size: 1.3rem;
       line-height: 1.6;
       opacity: 0.95;
-    }
-
-    .hero-stats {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .stat-item {
-      background: rgba(255, 255, 255, 0.2);
-      padding: 1.5rem;
-      border-radius: 15px;
-      text-align: center;
-      backdrop-filter: blur(10px);
-    }
-
-    .stat-number {
-      display: block;
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .stat-label {
-      font-size: 1rem;
-      opacity: 0.9;
     }
 
     .category-filters {
