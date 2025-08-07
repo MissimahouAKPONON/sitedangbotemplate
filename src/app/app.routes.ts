@@ -6,6 +6,7 @@ import { ServicesPageComponent } from './pages/services-page.component';
 import { ServiceDetailPageComponent } from './pages/service-detail-page.component';
 import { DocumentationPageComponent } from './pages/documentation-page.component';
 import { ProjectsPageComponent } from './pages/projects-page.component';
+import { ContactPageComponent } from './pages/contact-page.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,5 +16,6 @@ export const routes: Routes = [
   { path: 'services/celebration-mariage', component: ServiceDetailPageComponent },
   { path: 'documentation', component: DocumentationPageComponent },
   { path: 'projets', component: ProjectsPageComponent },
+  { path: 'contact', component: ContactPageComponent },
   { path: '**', redirectTo: '' }
 ];
