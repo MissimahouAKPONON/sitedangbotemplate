@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component } from '&#64;angular/core';
 import { HeaderComponent } from '../components/header.component';
 import { FooterComponent } from '../components/footer.component';
 import { ContactComponent } from '../components/contact.component';
 
-@Component({
+&#64;Component({
   selector: 'app-contact-page',
   standalone: true,
   imports: [
