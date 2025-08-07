@@ -33,7 +33,7 @@ import { RouterModule } from '@angular/router';
               <li><a routerLink="/municipalite">Municipalité</a></li>
               <li><a routerLink="/services">Services</a></li>
               <li><a routerLink="/documentation">Documentation</a></li>
-              <li><a href="#projets">Projets</a></li>
+              <li><a routerLink="/projets">Projets</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
           </nav>
