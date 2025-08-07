@@ -3,7 +3,7 @@ import { HeaderComponent } from '../components/header.component';
 import { FooterComponent } from '../components/footer.component';
 import { ContactComponent } from '../components/contact.component';
 
-&#64;Component({
+@Component({
   selector: 'app-contact-page',
   standalone: true,
   imports: [
