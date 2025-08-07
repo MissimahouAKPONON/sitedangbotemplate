@@ -54,14 +54,16 @@ import { RouterModule } from '@angular/router';
 
     .header-content {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
       padding: 1rem 0;
+      gap: 2rem;
     }
 
     .logo-section {
       display: flex;
       align-items: center;
+      margin-right: auto;
     }
 
     .logo {
@@ -125,8 +127,9 @@ import { RouterModule } from '@angular/router';
 
     .nav-list a {
       color: #000000;
-      font-weight: 500;
-      padding: 0.5rem 1rem;
+      font-weight: 400;
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
       border-radius: 8px;
       transition: all 0.3s ease;
       position: relative;
