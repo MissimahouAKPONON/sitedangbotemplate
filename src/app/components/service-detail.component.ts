@@ -207,7 +207,7 @@ import { RouterModule } from '@angular/router';
                   <span class="contact-icon">✉️</span>
                   <div>
                     <strong>Email</strong>
-                    <p>etatcivil@dangbo.bj</p>
+                    <p>etatcivil&#64;dangbo.bj</p>
                   </div>
                 </div>
                 <div class="contact-item">
