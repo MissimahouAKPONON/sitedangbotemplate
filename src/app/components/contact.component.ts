@@ -2,7 +2,7 @@ import { Component } from '&#64;angular/core';
 import { CommonModule } from '&#64;angular/common';
 import { FormsModule } from '&#64;angular/forms';
 
-&#64;Component({
+@Component({
   selector: 'app-contact',
   standalone: true,
   imports: [CommonModule, FormsModule],
