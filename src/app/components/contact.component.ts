@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { Component } from '&#64;angular/core';
+import { CommonModule } from '&#64;angular/common';
+import { FormsModule } from '&#64;angular/forms';
 
-@Component({
+&#64;Component({
   selector: 'app-contact',
   standalone: true,
   imports: [CommonModule, FormsModule],
@@ -215,8 +215,8 @@ import { FormsModule } from '@angular/forms';
                   <div class="contact-icon">✉️</div>
                   <div class="contact-details">
                     <strong>Email</strong>
-                    <p>contact@dangbo.bj</p>
-                    <p>mairie.dangbo@gmail.com</p>
+                    <p>contact&#64;dangbo.bj</p>
+                    <p>mairie.dangbo&#64;gmail.com</p>
                   </div>
                 </div>
 
@@ -693,7 +693,7 @@ import { FormsModule } from '@angular/forms';
       box-shadow: 0 5px 15px rgba(103, 99, 225, 0.3);
     }
 
-    @media (max-width: 768px) {
+    &#64;media (max-width: 768px) {
       .contact {
         padding: 1rem 0;
       }
