@@ -28,6 +28,7 @@ import { RouterModule } from '@angular/router';
           
           <nav class="nav" [class.nav-open]="mobileMenuOpen">
             <ul class="nav-list">
+              <li><a routerLink="/">Accueil</a></li>
               <li><a routerLink="/" fragment="actualites">Actualités</a></li>
               <li><a routerLink="/decouvrir-dangbo">Découvrir Dangbo</a></li>
               <li><a routerLink="/municipalite">Municipalité</a></li>

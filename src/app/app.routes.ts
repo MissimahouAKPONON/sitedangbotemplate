@@ -7,9 +7,11 @@ import { ServiceDetailPageComponent } from './pages/service-detail-page.componen
 import { DocumentationPageComponent } from './pages/documentation-page.component';
 import { ProjectsPageComponent } from './pages/projects-page.component';
 import { ContactPageComponent } from './pages/contact-page.component';
+import { ActualitesPageComponent } from './pages/actualites-page.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'actualites', component: ActualitesPageComponent },
   { path: 'decouvrir-dangbo', component: DiscoverDangboPageComponent },
   { path: 'municipalite', component: MunicipalityPageComponent },
   { path: 'services', component: ServicesPageComponent },
