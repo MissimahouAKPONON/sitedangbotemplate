@@ -1,6 +1,6 @@
-import { Component } from '&#64;angular/core';
-import { CommonModule } from '&#64;angular/common';
-import { FormsModule } from '&#64;angular/forms';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
